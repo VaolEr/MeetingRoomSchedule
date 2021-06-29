@@ -1,0 +1,4 @@
+databaseChangeLog:
+  # DB schema initialization
+  - include:
+      file: db/changelog/schema/2021-06-29-init-db-schema.sql

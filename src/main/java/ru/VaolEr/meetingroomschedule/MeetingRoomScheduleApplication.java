@@ -8,6 +8,7 @@ public class MeetingRoomScheduleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeetingRoomScheduleApplication.class, args);
+
 	}
 
 }
