@@ -2,3 +2,6 @@ databaseChangeLog:
   # DB schema initialization
   - include:
       file: db/changelog/schema/2021-06-29-init-db-schema.sql
+  # Populating DB with test data
+  - include:
+      file: db/changelog/data/2021-06-30-add-test-data.sql

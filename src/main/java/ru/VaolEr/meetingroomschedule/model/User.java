@@ -1,8 +1,7 @@
 package ru.VaolEr.meetingroomschedule.model;
 
 import lombok.NoArgsConstructor;
-import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractEntity;
-import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractNamedEntity;
+import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractBaseEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 @Entity(name = "user")
 @Table(name = "Users")
 @NoArgsConstructor
-public class User extends AbstractEntity {
+public class User extends AbstractBaseEntity {
 
     @Column(name = "firstname")
     private String firstName;
@@ -25,8 +24,8 @@ public class User extends AbstractEntity {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Event> eventList; //as event_id
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "creatorUser")
+    private List<Event> events; //as event_id
 
     public String getFirstName() {
         return firstName;
@@ -64,12 +63,23 @@ public class User extends AbstractEntity {
         return this;
     }
 
-    public List<Event> getEventList() {
-        return eventList;
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public User setEventList(List<Event> eventList) {
-        this.eventList = eventList;
+    public User setEvents(List<Event> eventList) {
+        this.events = eventList;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", eventList=" + events.size() +
+                '}';
     }
 }

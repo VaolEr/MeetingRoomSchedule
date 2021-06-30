@@ -1,19 +1,21 @@
 package ru.VaolEr.meetingroomschedule.model;
 
-import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractNamedEntity;
+import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractNamedBaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "meetingRoom")
-@Table(name = "MeetingRooms")
-public class MeetingRoom extends AbstractNamedEntity {
+@Table(name = "meetingrooms")
+public class MeetingRoom extends AbstractNamedBaseEntity {
 
-    @OneToMany
-    @JoinColumn(name = "meetingRoom_id")
-    List<EventScheduleDate> eventScheduleDate;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "meetingRoom")
+    List<EventDate> eventDate;
 
+    @Override
+    public String toString() {
+        return "MeetingRoom{" +
+                "eventDate=" + eventDate.toString() +
+                '}';
+    }
 }

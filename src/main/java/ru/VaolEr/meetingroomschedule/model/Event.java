@@ -1,22 +1,31 @@
 package ru.VaolEr.meetingroomschedule.model;
 
-import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractNamedEntity;
+import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractNamedBaseEntity;
 
 import javax.persistence.*;
 
 @Entity(name = "event")
 @Table(name = "Events")
-public class Event extends AbstractNamedEntity{
+public class Event extends AbstractNamedBaseEntity {
 
     @Column(name = "description")
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "event_id")
-    private EventScheduleDate eventScheduleDate;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private EventDate eventDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "creatorUser_id")
-    private User user;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "creatoruser_id")
+    private User creatorUser;
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + this.getId() +
+                " description='" + description + '\'' +
+                ", eventDate=" + eventDate.toString() +
+                ", user=" + creatorUser.toString() +
+                '}';
+    }
 }

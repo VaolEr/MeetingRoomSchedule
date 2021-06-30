@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractEntity implements Persistable<Integer> {
+public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     @Id
     @GeneratedValue
@@ -17,7 +17,7 @@ public abstract class AbstractEntity implements Persistable<Integer> {
         return id;
     }
 
-    public AbstractEntity setId(Integer id) {
+    public AbstractBaseEntity setId(Integer id) {
         this.id = id;
         return this;
     }

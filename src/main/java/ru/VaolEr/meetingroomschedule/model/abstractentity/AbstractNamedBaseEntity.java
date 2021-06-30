@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
-public abstract class AbstractNamedEntity extends AbstractEntity {
+public abstract class AbstractNamedBaseEntity extends AbstractBaseEntity {
 
     @NotNull
     @NotBlank
@@ -17,7 +17,7 @@ public abstract class AbstractNamedEntity extends AbstractEntity {
         return name;
     }
 
-    public AbstractNamedEntity setName(String name) {
+    public AbstractNamedBaseEntity setName(String name) {
         this.name = name;
         return this;
     }
