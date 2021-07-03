@@ -1,6 +1,5 @@
 package ru.VaolEr.meetingroomschedule.model.paging;
 
-import org.springframework.data.domain.Page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

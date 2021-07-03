@@ -18,7 +18,7 @@ public class EventsCalendarWeek {
 
     List<Date> weekDates = new ArrayList<>();
 
-    LinkedHashMap<Integer,ArrayList<EventTo>> eventsPerHours = new LinkedHashMap<>();
+    LinkedHashMap<Integer, ArrayList<EventTo>> eventsPerHours = new LinkedHashMap<>();
 
     private List<EventTo> mondayEvents = new ArrayList<>();
     private List<EventTo> tuesdayEvents = new ArrayList<>();
@@ -119,7 +119,8 @@ public class EventsCalendarWeek {
 
     private void initEventsPerHoursMap(){
         for(int i = 0; i < 25; i++){
-            eventsPerHours.put(i,new ArrayList<>());
+            ArrayList<EventTo> arrayList = new ArrayList<>();
+            eventsPerHours.put(i,arrayList);
         }
         getDayEventPerHourMap(mondayEvents);
         getDayEventPerHourMap(tuesdayEvents);
@@ -127,32 +128,9 @@ public class EventsCalendarWeek {
         getDayEventPerHourMap(thursdayEvents);
         getDayEventPerHourMap(fridayEvents);
         getDayEventPerHourMap(saturdayEvents);
-//        for(EventTo event: mondayEvents){
-//            eventsPerHours.put(event.getHourOfDay(),new ArrayList<>());
-//            eventsPerHours.get(event.getHourOfDay()).add(event);
-//        }
-//        tuesdayEvents.forEach(eventTo -> {
-//            eventsPerHours.put(eventTo.getHourOfDay(),new ArrayList<>());
-//            eventsPerHours.get(eventTo.getHourOfDay()).add(eventTo);
-//        });
-//        wednesdayEvents.forEach(eventTo -> {
-//            eventsPerHours.put(eventTo.getHourOfDay(),new ArrayList<>());
-//            eventsPerHours.get(eventTo.getHourOfDay()).add(eventTo);
-//        });
-//        thursdayEvents.forEach(eventTo -> {
-//            eventsPerHours.put(eventTo.getHourOfDay(),new ArrayList<>());
-//            eventsPerHours.get(eventTo.getHourOfDay()).add(eventTo);
-//        });
-//       fridayEvents.forEach(eventTo -> {
-//            eventsPerHours.put(eventTo.getHourOfDay(),new ArrayList<>());
-//            eventsPerHours.get(eventTo.getHourOfDay()).add(eventTo);
-//        });
-//        saturdayEvents.forEach(eventTo -> {
-//            eventsPerHours.put(eventTo.getHourOfDay(),new ArrayList<>());
-//            eventsPerHours.get(eventTo.getHourOfDay()).add(eventTo);
-//        });
     }
     private void getDayEventPerHourMap(List<EventTo> eventsPerDay){
+
         eventsPerDay.forEach(eventTo -> {
             //eventsPerHours.put(eventTo.getHourOfDay(),new ArrayList<>());
             eventsPerHours.get(eventTo.getHourOfDay()).add(eventTo);

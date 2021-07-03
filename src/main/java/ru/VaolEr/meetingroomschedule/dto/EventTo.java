@@ -20,6 +20,7 @@ public class EventTo {
     private Integer creatorId;
     private Integer meetingRoomId;
 
+
     public Integer getDayOfWeek(){
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(this.date);
@@ -30,5 +31,22 @@ public class EventTo {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(this.startTime);
         return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public String getStartAndEndTime(){
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarStop = Calendar.getInstance();
+        calendarStart.setTime(startTime);
+        calendarStop.setTime(endTime);
+
+        return String.format("%s - %s", getFormattedTime(calendarStart), getFormattedTime(calendarStop));
+    }
+
+    private String getFormattedTime(Calendar calendar){
+
+        String hour = (calendar.get(Calendar.HOUR_OF_DAY) < 10) ? String.format("0%d", calendar.get(Calendar.HOUR_OF_DAY)) : String.format("%d", calendar.get(Calendar.HOUR_OF_DAY));
+        String minutes = (calendar.get(Calendar.MINUTE) < 10) ? String.format("0%d", calendar.get(Calendar.MINUTE)) : String.format("%d", calendar.get(Calendar.MINUTE));
+
+        return String.format("%s:%s", hour, minutes);
     }
 }

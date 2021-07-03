@@ -8,3 +8,10 @@ databaseChangeLog:
   # Populating DB with test data: add monday events test data
   - include:
         file: db/changelog/data/2021-02-07-add-more-test-data.sql
+  # Populating DB with test data: add saturday and friday events test data
+  - include:
+      file: db/changelog/data/2021-07-03-add-friday-and-saturday-test-data.sql
+
+  # Update users passwords
+  - include:
+      file: db/changelog/data/2021-07-03-update-users-passwords.sql

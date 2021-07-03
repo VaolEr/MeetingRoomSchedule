@@ -1,5 +1,7 @@
 package ru.VaolEr.meetingroomschedule.util;
 
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.VaolEr.meetingroomschedule.dto.UserTo;
 import ru.VaolEr.meetingroomschedule.model.User;
 
@@ -9,6 +11,8 @@ import java.util.stream.Collectors;
 import static org.springframework.util.StringUtils.hasText;
 
 public class UsersUtil {
+
+    public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     public static UserTo toUserTo(User user) {
         return UserTo
