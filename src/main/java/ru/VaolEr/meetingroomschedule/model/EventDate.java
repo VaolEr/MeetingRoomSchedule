@@ -1,5 +1,7 @@
 package ru.VaolEr.meetingroomschedule.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractBaseEntity;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import java.sql.Timestamp;
 
 @Entity(name = "event_date")
 @Table(name = "Events_Dates")
+@Getter
+@Setter
 public class EventDate extends AbstractBaseEntity {
 
     @JoinColumn(name = "date")

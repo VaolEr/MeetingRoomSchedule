@@ -10,7 +10,6 @@ import static org.springframework.util.StringUtils.hasText;
 
 public class UsersUtil {
 
-
     public static UserTo toUserTo(User user) {
         return UserTo
                 .builder()

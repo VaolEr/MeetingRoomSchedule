@@ -1,11 +1,16 @@
 package ru.VaolEr.meetingroomschedule.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import ru.VaolEr.meetingroomschedule.model.abstractentity.AbstractNamedBaseEntity;
 
 import javax.persistence.*;
 
 @Entity(name = "event")
 @Table(name = "Events")
+@Getter
+@Setter
 public class Event extends AbstractNamedBaseEntity {
 
     @Column(name = "description")

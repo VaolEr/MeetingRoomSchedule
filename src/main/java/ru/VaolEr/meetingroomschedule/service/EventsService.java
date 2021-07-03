@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.VaolEr.meetingroomschedule.model.Event;
 import ru.VaolEr.meetingroomschedule.repository.EventsRepository;
 
+import java.util.List;
+
 import static ru.VaolEr.meetingroomschedule.util.ValidationUtil.addMessageDetails;
 import static ru.VaolEr.meetingroomschedule.util.ValidationUtil.checkNotFound;
 
@@ -19,4 +21,7 @@ public class EventsService {
                 addMessageDetails(Event.class.getSimpleName(), eventId));
     }
 
+    public List<Event> getAllEvents(){
+        return eventsRepository.findAll();
+    }
 }
