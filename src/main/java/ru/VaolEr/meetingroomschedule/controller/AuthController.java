@@ -12,9 +12,4 @@ public class AuthController {
     public String getLoginPage(){
         return "login";
     }
-
-//    @PostMapping("/timetable")
-//    public String returnTimetable(){
-//        return "index";
-//    }
 }

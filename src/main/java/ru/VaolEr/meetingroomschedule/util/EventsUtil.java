@@ -10,6 +10,7 @@ public class EventsUtil {
 
     public static EventTo toEventTo(Event event){
         return EventTo.builder()
+                .id(event.getId())
                 .name(event.getName())
                 .description(event.getDescription())
                 .date(event.getEventDate().getDate())

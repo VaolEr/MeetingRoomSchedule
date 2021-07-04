@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Info</title>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <table class="table table-bordered text-center">
+        <thead>
+        <tr class="bg-light-gray">
+            <th class="text-uppercase">
+                Event Name
+            </th>
+            <th class="text-uppercase">
+                Event Description
+            </th>
+            <th class="text-uppercase">
+                Event Start Time
+            </th>
+            <th class="text-uppercase">
+                Event End Time
+            </th>
+            <th class="text-uppercase">
+                Event initialization user
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            <td>
+                <div class="margin-10px-top font-size10" th:text="${eventName}"> Name </div>
+            </td>
+            <td>
+                <div class="margin-10px-top font-size10" th:text="${eventDescription}"> Description </div>
+            </td>
+            <td>
+                <div class="margin-10px-top font-size10" th:text="${startTime}"> Start Time </div>
+            </td>
+            <td>
+                <div class="margin-10px-top font-size10" th:text="${endTime}"> End Time </div>
+            </td>
+            <td>
+                <div class="margin-10px-top font-size10" th:text="${userName}"> User NAme </div>
+            </td>
+        </tbody>
+    </table>
+
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+    </form>
+</body>
+
+</html>

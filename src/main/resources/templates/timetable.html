@@ -20,79 +20,33 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="#" th:text="${'Current user: ' + userName}"> Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">About</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Services</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Contact</a>-->
+<!--                </li>-->
+
             </ul>
         </div>
     </div>
 </nav>
-
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <div class="col-lg-10 mt-5 mb-5">-->
-<!--            <table id="example" class="table table-bordered" style="width: 100%">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <th>Name</th>-->
-<!--                    <th>Description</th>-->
-<!--                    <th>Wednesday</th>-->
-<!--                    <th>Thursday</th>-->
-<!--                    <th>Friday</th>-->
-<!--                    <th>Saturday</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr th:each="eventTo : ${eventsTos}">-->
-<!--                    <td th:text="${eventTo.name}">Name</td>-->
-<!--                    <td></td>-->
-<!--                    <td th:text="${eventTo.description}">Wednesday</td>-->
-<!--&lt;!&ndash;                    <td th:text="${#dates.format(event.startDate, 'dd.MM.yyyy')}">Start date</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <td th:text="'$' + ${#numbers.formatDecimal(employee.salary, 0, 'COMMA', 2, 'POINT')}">Salary</td>&ndash;&gt;-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-
-<!--&lt;!&ndash;            <nav aria-label="Page navigation" class="paging">&ndash;&gt;-->
-<!--&lt;!&ndash;                <ul class="pagination" th:if="${employees.page.totalPages > 1}">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <li class="page-item" th:classappend="${!employees.paging.isPrevEnabled()? 'disabled' : ''}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a class="page-link" th:href="@{'/?pageNumber=' + ${employees.paging.pageNumber - 1}}"&ndash;&gt;-->
-<!--&lt;!&ndash;                           tabindex="-1">Previous</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </li>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <th:block th:each="item : ${employees.paging.getItems()}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <li class="page-item" th:classappend="${item.index == employees.paging.pageNumber? 'active' : ''}"&ndash;&gt;-->
-<!--&lt;!&ndash;                            th:if="${item.pageItemType.name() == 'PAGE'}">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"&ndash;&gt;-->
-<!--&lt;!&ndash;                               th:text="${item.index}"></a>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <a class="page-link" href="#">...</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </th:block>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <li class="page-item" th:classappend="${!employees.paging.isNextEnabled()? 'disabled' : ''}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a class="page-link" th:href="@{'/?pageNumber=' + ${employees.paging.pageNumber + 1}}">Next</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </li>&ndash;&gt;-->
-<!--&lt;!&ndash;                </ul>&ndash;&gt;-->
-<!--&lt;!&ndash;            </nav>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
+<div th:marginheight="30"> </div>
 <div class="container">
-<!--    <div class="timetable-img text-center">-->
-<!--        <img src="img/content/timetable.png" alt="">-->
-<!--    </div>-->
+    <div class="timetable-img text-center">
+        <img src="img/content/timetable.png" alt="">
+    </div>
     <div class="table-responsive">
+        <div> <input type="button" value="Add New Event" style="float: right;"> </div>
+        <div th:marginheight="30"> </div>
         <table class="table table-bordered text-center">
             <thead>
             <tr class="bg-light-gray">
@@ -124,212 +78,154 @@
             </tr>
             </thead>
             <tbody>
-
                 <tr th:each="hour : ${eventsPerHoursWeek.keySet()}">
-
-<!--                    TIME COLUMN-->
+                    <!--                    TIME COLUMN-->
                     <td class="align-middle" th:text="${hour}">TIME</td>
-
-                    <th:block th:if="${eventsPerHoursWeek.get(hour).isEmpty == true}">
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                    </th:block>
-
-                    <th:block th:unless="${eventsPerHoursWeek.get(hour).isEmpty == true}">
-
-                        <th:block th:each="eventTos : ${eventsPerHoursWeek.get(hour)}">
-
-<!--                            <th:block th:each="eventTo : ${eventTos}">-->
-
-<!--                                <td th:if="${eventTo.getDayOfWeek() == 2}">-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                    <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                </td>-->
-<!--                                <td th:unless="${eventTo.getDayOfWeek() == 2}">-->
-<!--                                    &lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </td>-->
-
-<!--                                <td th:if="${eventTo.getDayOfWeek() == 3}">-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                    <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                </td>-->
-<!--                                <td th:unless="${eventTo.getDayOfWeek() == 3}">-->
-<!--                                    &lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </td>-->
-
-<!--                                <td th:if="${eventTo.getDayOfWeek() == 4}">-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                    <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                </td>-->
-<!--                                <td th:unless="${eventTo.getDayOfWeek() == 4}">-->
-<!--                                    &lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </td>-->
-
-<!--                                <td th:if="${eventTo.getDayOfWeek() == 5}">-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                    <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                </td>-->
-<!--                                <td th:unless="${eventTo.getDayOfWeek() == 5}">-->
-<!--                                    &lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </td>-->
-
-<!--                                <td th:if="${eventTo.getDayOfWeek() == 6}">-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                    <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                </td>-->
-<!--                                <td th:unless="${eventTo.getDayOfWeek() == 6}">-->
-<!--                                    &lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </td>-->
-
-<!--                                <td th:if="${eventTo.getDayOfWeek() == 7}">-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                    <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                    <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                </td>-->
-<!--                                <td th:unless="${eventTo.getDayOfWeek() == 7}">-->
-<!--                                    &lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </td>-->
-<!--                        </th:block>-->
-
-                            <th:block th:each="eventTo : ${eventTos}">
-
-                                <th:block th:switch="${eventTo.getDayOfWeek()}">
-                                    <th:block th:case="2">
-                                        <td>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>
-                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>
-                                        </td>
-                                    </th:block>
-                                    <th:block th:case="3">
-                                        <td>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>
-                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>
-                                        </td>
-                                    </th:block>
-                                    <th:block th:case="4">
-                                        <td>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>
-                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>
-                                        </td>
-                                    </th:block>
-                                    <th:block th:case="5">
-                                        <td>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>
-                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>
-                                        </td>
-                                    </th:block>
-                                    <th:block th:case="6">
-                                        <td>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>
-                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>
-                                        </td>
-                                    </th:block>
-                                    <th:block th:case="7">
-                                        <td>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>
-                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>
-                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>
-                                        </td>
-                                    </th:block>
-                                    <th:block th:case=null>
-                                        <td>
-<!--                                            <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                            <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                            <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-                                        </td>
-                                    </th:block>
-                                </th:block>
-
-<!--                                &lt;!&ndash;                    MONDAY COLUMN&ndash;&gt;-->
-<!--                                <th:block th:if="${eventTo.getDayOfWeek() == 2}">-->
-<!--                                    <td>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                        <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                    </td>-->
-<!--                                </th:block>-->
-<!--                                <th:block th:unless="${eventTo.getDayOfWeek() == 2}">-->
-<!--&lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </th:block>-->
-
-<!--                                &lt;!&ndash;                    TUESDAY COLUMN&ndash;&gt;-->
-<!--                                <th:block th:if="${eventTo.getDayOfWeek() == 3}">-->
-<!--                                    <td>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                        <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                    </td>-->
-<!--                                </th:block>-->
-<!--                                <th:block th:unless="${eventTo.getDayOfWeek() == 3}">-->
-<!--&lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </th:block>-->
-
-<!--                                &lt;!&ndash;                    WEDNESDAY COLUMN&ndash;&gt;-->
-<!--                                <th:block th:if="${eventTo.getDayOfWeek() == 4}">-->
-<!--                                    <td>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                        <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                    </td>-->
-<!--                                </th:block>-->
-<!--                                <th:block th:unless="${eventTo.getDayOfWeek() == 4}">-->
-<!--&lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </th:block>-->
-
-<!--                                &lt;!&ndash;                    THURSDAY COLUMN&ndash;&gt;-->
-<!--                                <th:block th:if="${eventTo.getDayOfWeek() == 5}">-->
-<!--                                    <td>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                        <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                    </td>-->
-<!--                                </th:block>-->
-<!--                                <th:block th:unless="${eventTo.getDayOfWeek() == 5}">-->
-<!--&lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </th:block>-->
-
-<!--                                &lt;!&ndash;                    FRIDAY COLUMN&ndash;&gt;-->
-<!--                                <th:block th:if="${eventTo.getDayOfWeek() == 6}">-->
-<!--                                    <td>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                        <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                    </td>-->
-<!--                                </th:block>-->
-<!--                                <th:block th:unless="${eventTo.getDayOfWeek() == 6}">-->
-<!--&lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </th:block>-->
-
-<!--                                &lt;!&ndash;                    SATURDAY COLUMN&ndash;&gt;-->
-<!--                                <th:block th:if="${eventTo.getDayOfWeek() == 7}">-->
-<!--                                    <td>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getDescription}">Author</div>-->
-<!--                                        <div STYLE="font-size:18px" th:text="${eventTo.name}">Event Name</div>-->
-<!--                                        <div STYLE="font-size:14px" th:text="${eventTo.getStartAndEndTime}">Event Time</div>-->
-<!--                                    </td>-->
-<!--                                </th:block>-->
-<!--                                <th:block th:unless="${eventTo.getDayOfWeek() == 7}">-->
-<!--&lt;!&ndash;                                    <td> </td>&ndash;&gt;-->
-<!--                                </th:block>-->
-
+                    <td>
+                        <th:block th:if="${eventsPerHoursWeek.get(hour)[0].name ne null or eventsPerHoursWeek.get(hour)[1].name ne null}">
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[0].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[0].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[0].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[0].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[0].name ne null and eventsPerHoursWeek.get(hour)[1].name ne null}">
+                                <div> ---------- </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[1].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[1].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[1].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[1].getId()})}"> Show info </a>
+                                </div>
                             </th:block>
                         </th:block>
-                    </th:block>>
-                </tr>>
+                        <th:block th:unless="${eventsPerHoursWeek.get(hour)[0].name ne null or eventsPerHoursWeek.get(hour)[1].name ne null}">
+
+                        </th:block>
+                    </td>
+                    <td>
+                        <th:block th:if="${eventsPerHoursWeek.get(hour)[2].name ne null or eventsPerHoursWeek.get(hour)[3].name ne null}">
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[2].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[2].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[2].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[2].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[2].name ne null and eventsPerHoursWeek.get(hour)[3].name ne null}">
+                                <div> ---------- </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[3].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[3].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[3].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[3].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <th:block th:unless="${eventsPerHoursWeek.get(hour)[2].name ne null or eventsPerHoursWeek.get(hour)[3].name ne null}">
+
+                        </th:block>
+                    </td>
+                    <td>
+                        <th:block th:if="${eventsPerHoursWeek.get(hour)[4].name ne null or eventsPerHoursWeek.get(hour)[5].name ne null}">
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[4].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[4].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[4].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[4].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[4].name ne null and eventsPerHoursWeek.get(hour)[5].name ne null}">
+                                <div> ---------- </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[5].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[5].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[5].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[5].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <th:block th:unless="${eventsPerHoursWeek.get(hour)[4].name ne null or eventsPerHoursWeek.get(hour)[5].name ne null}">
+
+                        </th:block>
+                    </td>
+                    <td>
+                        <th:block th:if="${eventsPerHoursWeek.get(hour)[6].name ne null or eventsPerHoursWeek.get(hour)[7].name ne null}">
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[6].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[6].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[6].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[6].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[6].name ne null and eventsPerHoursWeek.get(hour)[7].name ne null}">
+                                <div> ---------- </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[1].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[7].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[7].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[7].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <th:block th:unless="${eventsPerHoursWeek.get(hour)[6].name ne null or eventsPerHoursWeek.get(hour)[7].name ne null}">
+
+                        </th:block>
+                    </td>
+                    <td>
+                        <th:block th:if="${eventsPerHoursWeek.get(hour)[8].name ne null or eventsPerHoursWeek.get(hour)[9].name ne null}">
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[8].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[8].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[8].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[8].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[8].name ne null and eventsPerHoursWeek.get(hour)[9].name ne null}">
+                                <div> ---------- </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[9].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[9].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[9].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[9].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <th:block th:unless="${eventsPerHoursWeek.get(hour)[8].name ne null or eventsPerHoursWeek.get(hour)[9].name ne null}">
+
+                        </th:block>
+                    </td>
+                    <td>
+                        <th:block th:if="${eventsPerHoursWeek.get(hour)[10].name ne null or eventsPerHoursWeek.get(hour)[11].name ne null}">
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[10].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[10].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[10].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[10].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[10].name ne null and eventsPerHoursWeek.get(hour)[11].name ne null}">
+                                <div> ---------- </div>
+                            </th:block>
+                            <th:block th:if="${eventsPerHoursWeek.get(hour)[9].name ne null}">
+                                <div STYLE="font-size:18px" th:text="${eventsPerHoursWeek.get(hour)[11].name}">Event Name</div>
+                                <div STYLE="font-size:14px" th:text="${eventsPerHoursWeek.get(hour)[11].getStartAndEndTime}">Event Time</div>
+                                <div>
+                                    <a th:href="@{/timetable/events/{id} (id=${eventsPerHoursWeek.get(hour)[11].getId()})}"> Show info </a>
+                                </div>
+                            </th:block>
+                        </th:block>
+                        <th:block th:unless="${eventsPerHoursWeek.get(hour)[10].name ne null or eventsPerHoursWeek.get(hour)[11].name ne null}">
+
+                        </th:block>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <nav aria-label="Year navigation" class="paging">

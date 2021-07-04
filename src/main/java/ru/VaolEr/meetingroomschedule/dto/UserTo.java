@@ -3,6 +3,11 @@ package ru.VaolEr.meetingroomschedule.dto;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * @Author VaolEr
+ * This class describes User transfer object
+ */
+
 @Builder
 @Data
 public class UserTo {

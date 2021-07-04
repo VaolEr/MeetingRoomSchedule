@@ -8,10 +8,16 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * @Author VaolEr
+ * This class describes Event transfer object
+ */
+
 @Builder
 @Data
 public class EventTo {
 
+    private Integer id;
     private String name;
     private String description;
     private Date date;
@@ -31,6 +37,12 @@ public class EventTo {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(this.startTime);
         return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public Integer getMinutesOfHour(){
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(this.startTime);
+        return calendar.get(Calendar.MINUTE);
     }
 
     public String getStartAndEndTime(){
