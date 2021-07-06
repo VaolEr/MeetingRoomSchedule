@@ -8,7 +8,7 @@ This app was designed for creating event's schedule for meeting room.
     Java 8, Spring Boot, Spring Security, Spring Data JPA, Hybernate, PostgrteSQL, Liquibase, Thymeleaf + Bootstrap
 
 ### System requirements:
-    Java 8
+    Java 8, free system port 8080.
 
 ### Prepare to use:
 1. Download all project files to your PC;
@@ -17,7 +17,7 @@ This app was designed for creating event's schedule for meeting room.
 
 ### App endpoints info:
 - App endpoints:
-    - `/login` - returns the login page;
+    - `/login` - returns the login page (Optional. By default, using spring security default page);
     - `/timetable` - returns the schedule;
     - `/timetable/events/{id}` - returns the event info by event id;
 
