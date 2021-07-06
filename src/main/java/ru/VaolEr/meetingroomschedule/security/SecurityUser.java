@@ -61,7 +61,7 @@ public class SecurityUser implements UserDetails {
 
     public static UserDetails fromUser(User user){
         return new org.springframework.security.core.userdetails.User(
-                user.getLogin(), user.getPassword(),
+                user.getLogin()+"#"+user.getId(), user.getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority("ADMIN"))
         );
     }

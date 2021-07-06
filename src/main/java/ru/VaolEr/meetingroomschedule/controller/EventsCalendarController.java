@@ -6,21 +6,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.VaolEr.meetingroomschedule.dto.EventTo;
 import ru.VaolEr.meetingroomschedule.model.User;
 import ru.VaolEr.meetingroomschedule.service.EventsCalendarService;
 import ru.VaolEr.meetingroomschedule.service.EventsService;
 import ru.VaolEr.meetingroomschedule.service.UsersService;
 
-import java.util.Arrays;
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.HashMap;
 
 import static ru.VaolEr.meetingroomschedule.util.EventsUtil.toEventTo;
+import static ru.VaolEr.meetingroomschedule.util.EventsUtil.validateEventTo;
 
 @Slf4j
 @Controller
@@ -77,6 +75,38 @@ public class EventsCalendarController {
         User user = usersService.getById(eventTo.getCreatorId());
         model.addAttribute("userName", user.getFirstName() + " " + user.getLastName());
         return "eventInfo";
+    }
+
+    @GetMapping("/newEvent")
+    public String getNewEventPage(Model model){
+        model.addAttribute("event", new EventTo());
+        return "newEvent";
+    }
+
+    @PostMapping("/newEvent")
+    public String getNewEvent(EventTo event, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName().split("#")[0];
+        Integer currentUserId = Integer.valueOf(authentication.getName().split("#")[1]);
+//        log.info(currentUserName +" /--/ " + currentUserId);
+        String result;
+        if(eventsService.getOverlapsedEventIds(event).size() != 0) result = "There is another event in selected time period. Pick new time, please!";
+        result =  validateEventTo(event);
+        //TODO add validation with database existing events.
+//        log.info(event.getName()+ " " + result + " " + event.getStartTime() + " " + event.getEndTime());
+//        log.info(String.valueOf(eventsService.getOverlapsedEventIds(event)));
+        event.setCreatorId(currentUserId);
+        event.setDate(new java.sql.Date(event.getStartTime().getTime()));
+        event.setMeetingRoomId(1);
+//        log.info(event.toString());
+
+        if(result.equals("passed")){
+            eventsService.create(event);
+            return "redirect:/timetable?pageNumber="+Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+        } else {
+            model.addAttribute("description", result);
+            return "newEventValidateErrorPage";
+        }
     }
 
 }

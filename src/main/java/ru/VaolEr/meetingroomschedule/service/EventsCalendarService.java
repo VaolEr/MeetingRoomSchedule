@@ -31,7 +31,8 @@ public class EventsCalendarService {
     @PostConstruct
     public void init(){
         eventsCalendarYear = new EventsCalendarYear();
-        eventsCalendarYear.insertEvents(toEventTos(eventsService.getAllEvents()));
+//        eventsCalendarYear.insertEvents(toEventTos(eventsService.getAllEvents()));
+        updateEvents();
     }
 
     public EventsCalendarYear getEventsCalendarYear(){
@@ -45,11 +46,13 @@ public class EventsCalendarService {
     }
 
     public EventsCalendarWeek getEventsCalendarWeekByNumber(Integer weekNumber){
+        updateEvents();
         return eventsCalendarYear.getEventCalendarWeekByNumber(weekNumber);
     }
 
     public Paged<EventsCalendarWeek> getPagedEventsCalendarWeek(int weekNumber, int size){
         try {
+            updateEvents();
             List<EventsCalendarWeek> listOfWeeks = eventsCalendarYear.getListOfWeeks();
 
             List<EventsCalendarWeek> paged = listOfWeeks.stream()
@@ -65,5 +68,9 @@ public class EventsCalendarService {
         }
 
         return new Paged<>();
+    }
+
+    private void updateEvents(){
+        eventsCalendarYear.insertEvents(toEventTos(eventsService.getAllEvents()));
     }
 }

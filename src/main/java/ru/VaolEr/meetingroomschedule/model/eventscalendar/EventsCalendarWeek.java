@@ -183,7 +183,7 @@ public class EventsCalendarWeek {
     private void initPerHourEventsMap(){
         for(int i = 0; i < 25; i++){
             EventTo[] eventTos = new EventTo[12];
-            EventTo event = EventTo.builder().build();
+            EventTo event = new EventTo();
             for(int j = 0; j<12; j++){
                 eventTos[j] = event;
             }
