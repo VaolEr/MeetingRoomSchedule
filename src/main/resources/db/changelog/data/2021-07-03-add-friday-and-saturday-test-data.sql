@@ -16,5 +16,5 @@ VALUES ('2021-07-02', (SELECT id FROM events WHERE name = 'JohnDoe Friday event'
        ('2021-07-02', (SELECT id FROM events WHERE name = 'Admin Friday event'),'2021-07-02 08:00:00','2021-07-02 08:50:00',(SELECT id FROM meetingrooms WHERE name = 'Test Room')),
        ('2021-07-02', (SELECT id FROM events WHERE name = 'User Friday event'),'2021-07-02 19:30:00','2021-07-02 21:00:00',(SELECT id FROM meetingrooms WHERE name = 'Test Room')),
        ('2021-07-03', (SELECT id FROM events WHERE name = 'JohnDoe Saturday event'),'2021-07-03 05:15:00','2021-07-03 07:45:00',(SELECT id FROM meetingrooms WHERE name = 'Test Room')),
-       ('2021-07-03', (SELECT id FROM events WHERE name = 'Admin Saturday event'),'2021-07-03 07:00:00','2021-07-03 08:50:00',(SELECT id FROM meetingrooms WHERE name = 'Test Room')),
+       ('2021-07-03', (SELECT id FROM events WHERE name = 'Admin Saturday event'),'2021-07-03 07:50:00','2021-07-03 08:50:00',(SELECT id FROM meetingrooms WHERE name = 'Test Room')),
        ('2021-07-03', (SELECT id FROM events WHERE name = 'User Saturday event'),'2021-07-03 16:30:00','2021-07-03 21:00:00',(SELECT id FROM meetingrooms WHERE name = 'Test Room'));

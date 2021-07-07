@@ -49,15 +49,15 @@ public class EventsService {
         eventDate.setStartTime(eventTo.getStartTime());
         eventDate.setEndTime(eventTo.getEndTime());
         eventDate.setMeetingRoom(checkNotFound(meetingRoomsRepository.findById(eventTo.getMeetingRoomId()), addMessageDetails(MeetingRoom.class.getSimpleName(), eventTo.getMeetingRoomId())));
-//        eventsDatesRepository.save(eventDate);
 
         Event event = fromEventTo(eventTo);
         event.setCreatorUser(checkNotFound(usersRepository.findById(eventTo.getCreatorId()), addMessageDetails(User.class.getSimpleName(), eventTo.getCreatorId())));
-//        event.setEventDate(eventDate);
+
         Event savedEvent = eventsRepository.save(event);
-//        log.info(savedEvent.toString());
+
         eventDate.setEvent(savedEvent);
         eventsDatesRepository.save(eventDate);
+        log.info("New Event created:" + savedEvent.getName());
         return savedEvent;
     }
 }

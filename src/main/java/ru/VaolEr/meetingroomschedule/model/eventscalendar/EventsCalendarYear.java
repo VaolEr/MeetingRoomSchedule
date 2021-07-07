@@ -1,15 +1,15 @@
 package ru.VaolEr.meetingroomschedule.model.eventscalendar;
 
 import ru.VaolEr.meetingroomschedule.dto.EventTo;
-import ru.VaolEr.meetingroomschedule.model.Event;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class for join calendar and events
- * @autor Valentin Eremizin
+ *
  * @version 0.1
+ * @autor Valentin Eremizin
  */
 public class EventsCalendarYear {
 
@@ -24,6 +24,7 @@ public class EventsCalendarYear {
 
     /**
      * Constructor - create new EventsCalendarYear object for desired year
+     *
      * @param year - desired year
      */
     public EventsCalendarYear(Integer year) {
@@ -45,17 +46,20 @@ public class EventsCalendarYear {
 
     /**
      * Function get Events Calendar Week by week number
+     *
      * @param weekNumber - week number for return (values from 0 to 52 are available)
      * @return EventsCalendarWeek
      */
-    public EventsCalendarWeek getEventCalendarWeekByNumber(Integer weekNumber){
-        if(weekNumber < 0 || weekNumber > 52) throw new IllegalArgumentException("weekNumber have to be in range [0-52], current " + weekNumber);
+    public EventsCalendarWeek getEventCalendarWeekByNumber(Integer weekNumber) {
+        if (weekNumber < 0 || weekNumber > 52)
+            throw new IllegalArgumentException("weekNumber have to be in range [0-52], current " + weekNumber);
         else return listOfWeeks.get(weekNumber);
     }
 
 
     /**
      * Function for init list of weeks for current system year
+     *
      * @void generates listOfWeeks
      */
     private void initYear() {
@@ -66,6 +70,7 @@ public class EventsCalendarYear {
 
     /**
      * Function for init list of weeks for desired year
+     *
      * @param year - desired year
      * @void generates listOfWeeks
      */

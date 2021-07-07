@@ -2,7 +2,9 @@ package ru.VaolEr.meetingroomschedule.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.VaolEr.meetingroomschedule.dto.EventTo;
 import ru.VaolEr.meetingroomschedule.model.EventDate;
+import ru.VaolEr.meetingroomschedule.model.MeetingRoom;
 import ru.VaolEr.meetingroomschedule.repository.EventsDatesRepository;
 
 import static ru.VaolEr.meetingroomschedule.util.ValidationUtil.addMessageDetails;

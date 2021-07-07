@@ -23,7 +23,7 @@
     <div class="col align-self-center">
       <form method="post" th:object="${event}">
         <div class="form-group">
-          <label >New event page</label>
+          <label>New event page</label>
         </div>
         <div class="form-group">
           <label for="Name">Name:</label>
@@ -56,6 +56,7 @@
           </div>
         </div>
         <button class="btn btn-primary" type="submit">Create event</button>
+        <button class="btn btn-primary" onclick="history.back()">Return</button>
         <span></span>
       </form>
     </div>

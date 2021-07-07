@@ -1,6 +1,5 @@
 package ru.VaolEr.meetingroomschedule.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import ru.VaolEr.meetingroomschedule.model.paging.Paging;
 import javax.annotation.PostConstruct;
 
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,28 +27,27 @@ public class EventsCalendarService {
     private EventsCalendarYear eventsCalendarYear;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         eventsCalendarYear = new EventsCalendarYear();
-//        eventsCalendarYear.insertEvents(toEventTos(eventsService.getAllEvents()));
         updateEvents();
     }
 
-    public EventsCalendarYear getEventsCalendarYear(){
+    public EventsCalendarYear getEventsCalendarYear() {
         return eventsCalendarYear;
     }
 
-    public EventsCalendarYear getEventsCalendarYearByYear(Integer year){
+    public EventsCalendarYear getEventsCalendarYearByYear(Integer year) {
         EventsCalendarYear eventsCalendarYearByYear = new EventsCalendarYear(year);
-        eventsCalendarYearByYear.insertEvents(toEventTos(eventsService.getAllEvents()));
+        updateEvents();
         return eventsCalendarYearByYear;
     }
 
-    public EventsCalendarWeek getEventsCalendarWeekByNumber(Integer weekNumber){
+    public EventsCalendarWeek getEventsCalendarWeekByNumber(Integer weekNumber) {
         updateEvents();
         return eventsCalendarYear.getEventCalendarWeekByNumber(weekNumber);
     }
 
-    public Paged<EventsCalendarWeek> getPagedEventsCalendarWeek(int weekNumber, int size){
+    public Paged<EventsCalendarWeek> getPagedEventsCalendarWeek(int weekNumber, int size) {
         try {
             updateEvents();
             List<EventsCalendarWeek> listOfWeeks = eventsCalendarYear.getListOfWeeks();
@@ -60,7 +57,7 @@ public class EventsCalendarService {
                     .limit(size) //size = 1
                     .collect(Collectors.toList());
 
-            int totalPages = 52; //listOfWeeks.size() / size;
+            int totalPages = 52; // 52 because this count of weeks in year
             return new Paged<>(new Page<>(paged, totalPages), Paging.of(totalPages, weekNumber, size));
 
         } catch (Exception e) {
@@ -70,7 +67,7 @@ public class EventsCalendarService {
         return new Paged<>();
     }
 
-    private void updateEvents(){
+    private void updateEvents() {
         eventsCalendarYear.insertEvents(toEventTos(eventsService.getAllEvents()));
     }
 }

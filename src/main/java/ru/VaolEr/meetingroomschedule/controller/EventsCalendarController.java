@@ -35,11 +35,12 @@ public class EventsCalendarController {
     private HashMap<String, Integer> loggedUsers = new HashMap<>();
 
     @GetMapping
-    public String eventsList(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+    public String eventsList(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber, //pageNumber = weekNumber
                              @RequestParam(value = "size", required = false, defaultValue = "1") int size,
                              Model model){
+        log.info("GET /timetable?pageNumber=" + pageNumber + ",size=" + size);
 
-        //TODO do better current week page display after login. This method is not working correct for multiply users.
+        //TODO do better current week page display after login.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName();
         loggedUsers.computeIfAbsent(currentUserName, k -> countOfControllerCalls);
@@ -58,15 +59,12 @@ public class EventsCalendarController {
             model.addAttribute("eventsPerHoursWeekPaged", eventsCalendarService.getPagedEventsCalendarWeek(pageNumber,1));
             model.addAttribute("userName", currentUserName);
         }
-
-//        log.info(Arrays.toString(eventsCalendarService.getEventsCalendarWeekByNumber(26).getPerHourEvents().get(12)));
-//        log.info(String.valueOf(eventsCalendarService.getEventsCalendarWeekByNumber(26).getPerHourEvents().get(12)[0].getId()));
-
         return "timetable";
     }
 
     @GetMapping("/events/{id}")
     public String getEventDetailInfo(@PathVariable("id") int eventId, Model model){
+        log.info("GET request /events/" + eventId);
         EventTo eventTo = toEventTo(eventsService.getById(eventId));
         model.addAttribute("eventName", eventTo.getName());
         model.addAttribute("eventDescription", eventTo.getDescription());
@@ -79,26 +77,26 @@ public class EventsCalendarController {
 
     @GetMapping("/newEvent")
     public String getNewEventPage(Model model){
+        log.info("GET /timetable/newEvent");
         model.addAttribute("event", new EventTo());
         return "newEvent";
     }
 
     @PostMapping("/newEvent")
-    public String getNewEvent(EventTo event, Model model){
+    public String createNewEvent(EventTo event, Model model){
+        log.info("POST /timetable/newEvent");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = authentication.getName().split("#")[0];
         Integer currentUserId = Integer.valueOf(authentication.getName().split("#")[1]);
-//        log.info(currentUserName +" /--/ " + currentUserId);
+
         String result;
         if(eventsService.getOverlapsedEventIds(event).size() != 0) result = "There is another event in selected time period. Pick new time, please!";
         result =  validateEventTo(event);
+
         //TODO add validation with database existing events.
-//        log.info(event.getName()+ " " + result + " " + event.getStartTime() + " " + event.getEndTime());
-//        log.info(String.valueOf(eventsService.getOverlapsedEventIds(event)));
         event.setCreatorId(currentUserId);
         event.setDate(new java.sql.Date(event.getStartTime().getTime()));
-        event.setMeetingRoomId(1);
-//        log.info(event.toString());
+        event.setMeetingRoomId(1); // 1 because now we have only one Meeting Room with id = 1;
 
         if(result.equals("passed")){
             eventsService.create(event);
