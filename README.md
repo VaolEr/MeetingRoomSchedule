@@ -10,10 +10,20 @@ This app presents the Schedule of Meeting Room Events.
 
 ### Prepare to use:
 1. Download all project files to your PC using git or as archive;
-2. In `application.properties` database have property `createDatabaseIfNotExist=true`. In theory this will create database in your postgres server.
-3. In `application.properties` change `DATASOURCE_USERNAME` AND  `DATASOURCE_PASSWORD` for your own values.
-4. Just run project from IDE and go to `localhost:8080` in browser. If this port is busy you can change it in `application.properties` field `server.port`.
-5. After first running test data will be populated in database by Liquibase.  Week 26 is start point of test data. 
+2. Create database `meetingRoomsSchedules` <b>(case-sensitive !!!)</b> I used pgAdmin4 for this. SQL code example below:
+```SQL
+CREATE DATABASE "meetingRoomsSchedules"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Russian_Russia.1251'
+    LC_CTYPE = 'Russian_Russia.1251'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+```
+4. In `application.properties` change `DATASOURCE_USERNAME` AND  `DATASOURCE_PASSWORD` for your own values OR create user with corresponding values.
+5. Just run project from IDE and go to `localhost:8080` in browser. If this port is busy you can change it in `application.properties` field `server.port`.
+6. After first running test data will be populated in database by Liquibase.  Week 26 is start point of test data. 
 
 ### Getting access to app:
 - Users available for tests:
